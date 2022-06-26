@@ -11,13 +11,13 @@ export function Menu() {
   return (
     <MenuContainer>
       <SectionPages>
-        <Section>
+        {/* <Section>
           <House size={"1.25rem"} />
           <PageName>Dashboard</PageName>
-        </Section>
+        </Section> */}
         <Section>
           <ListChecks size={"1.25rem"} />
-          <PageName>Tasks</PageName>
+          <PageName>My Tasks</PageName>
         </Section>
         <Section>
           <ChartBar size={"1.25rem"} />
