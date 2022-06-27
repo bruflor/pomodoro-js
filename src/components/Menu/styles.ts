@@ -15,8 +15,6 @@ export const MenuContainer = styled.div`
   }
 `;
 
-export const SectionPages = styled.div``;
-export const SectionUser = styled.div``;
 export const Section = styled.div`
   width: 100%;
   height: 42px;
@@ -33,5 +31,3 @@ export const Section = styled.div`
     color: #a4d97e;
   }
 `;
-
-export const PageName = styled.div``;

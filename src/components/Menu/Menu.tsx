@@ -1,40 +1,34 @@
 import { House, ListChecks, ChartBar, SignOut, Info } from "phosphor-react";
 
-import {
-  MenuContainer,
-  Section,
-  PageName,
-  SectionPages,
-  SectionUser,
-} from "./styles";
-export function Menu() {
+import { MenuContainer, Section } from "./styles";
+export const Menu = () => {
   return (
     <MenuContainer>
-      <SectionPages>
+      <div>
         {/* <Section>
           <House size={"1.25rem"} />
           <PageName>Dashboard</PageName>
         </Section> */}
         <Section>
           <ListChecks size={"1.25rem"} />
-          <PageName>My Tasks</PageName>
+          <p>My Tasks</p>
         </Section>
         <Section>
           <ChartBar size={"1.25rem"} />
-          <PageName>Statistics</PageName>
+          <p>Statistics</p>
         </Section>
-      </SectionPages>
+      </div>
 
-      <SectionUser>
+      <div>
         <Section>
           <SignOut size={"1.25rem"} />
-          <PageName>Sign Out</PageName>
+          <p>Sign Out</p>
         </Section>
         <Section>
           <Info size={"1.25rem"} />
-          <PageName>Info</PageName>
+          <p>Info</p>
         </Section>
-      </SectionUser>
+      </div>
     </MenuContainer>
   );
-}
+};

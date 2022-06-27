@@ -1,26 +1,23 @@
-import {
-  SectionName,
-  Section,
-  ContainerDoubleColumn,
-} from "../My Tasks/styles";
+import { Section, ContainerDoubleColumn } from "../My Tasks/styles";
+import { Title } from "../Title/Title";
 
 export const MyTasks = () => {
   return (
     <div>
       <ContainerDoubleColumn>
         <Section>
-          <SectionName>Recent tasks</SectionName>
+          <Title name="Recent tasks" />
           //component
         </Section>
         <Section>
-          <SectionName>Daily stats</SectionName>
+          <Title name="Daily stats" />
           //component
         </Section>
       </ContainerDoubleColumn>
 
       <div>
         <Section>
-          <SectionName>My tasks</SectionName>
+          <Title name="My tasks" />
           //filter //add
         </Section>
       </div>

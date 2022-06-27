@@ -6,7 +6,7 @@ import { MainPage } from "./pages/MainPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import GlobalStyle from "./styles/global";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <GlobalStyle />
@@ -25,6 +25,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

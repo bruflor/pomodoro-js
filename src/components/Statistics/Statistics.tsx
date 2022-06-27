@@ -1,3 +1,5 @@
+import { Title } from "../Title/Title";
+
 export const Statistics = () => {
-  return <h1>Statistics</h1>;
+  return <Title name="Statistics" />;
 };
