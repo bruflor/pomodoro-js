@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`;
+
 export const HeaderContainer = styled.div`
   display: flex;
   gap: 16px;
@@ -34,5 +40,22 @@ export const TaskInfoContainer = styled.div`
   }
 `;
 
-//   export const HeaderContainer = styled.div``
+export const ClockContainer = styled.div`
+  background: #27272a;
+  width: 600px;
+  height: 550px;
+  border-radius: 16px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 16px; */
+`;
+export const ClockHeader = styled.div`
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #777777;
+  padding: 16px;
+  justify-content: center;
+`;
 //   export const HeaderContainer = styled.div``
