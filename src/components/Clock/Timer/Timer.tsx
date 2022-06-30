@@ -37,7 +37,7 @@ export const MyTimer = () => {
       localStorage.setItem("interval-id", `${interval}`);
     }
     if (timeOn) {
-      clearInterval(localStorage.getItem("interval-id"));
+      clearInterval(Number(localStorage.getItem("interval-id")));
     }
 
     setTimeOn(!timeOn);
