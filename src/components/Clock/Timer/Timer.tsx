@@ -1,11 +1,24 @@
 import { Pause, Play, Repeat } from "phosphor-react";
 import { useState } from "react";
-import { Length } from "./Length";
 
 export const MyTimer = () => {
-  const [displayTime, setDisplayTime] = useState(25 * 60);
+  // const breakTime = 2;
+  // const sessionTime = 5;
+  //this default value will come from the backend
+
+  const [sessionTime, setSessionTime] = useState(5);
+  const [breakTime, setBreakTime] = useState(3);
+  const [displayTime, setDisplayTime] = useState(5);
   const [timeOn, setTimeOn] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
+  const [breakAudio, setBreakAudio] = useState(
+    new Audio("../../../assets/alarm-freesound.mp3")
+  );
+
+  const playBreakSound = () => {
+    breakAudio.currentTime = 0;
+    breakAudio.play();
+  };
 
   //function for format the display time
   const formatTime = (time: any) => {
@@ -28,6 +41,17 @@ export const MyTimer = () => {
         date = new Date().getTime();
         if (date > nextDate) {
           setDisplayTime((prev) => {
+            if (prev <= 0 && !onBreakVariable) {
+              playBreakSound();
+              onBreakVariable = true;
+              setOnBreak(true);
+              return breakTime;
+            } else if (prev <= 0 && onBreakVariable) {
+              playBreakSound();
+              onBreakVariable = false;
+              setOnBreak(false);
+              return sessionTime;
+            }
             return prev - 1;
           });
           nextDate += second;
@@ -44,10 +68,8 @@ export const MyTimer = () => {
   };
   const resetTime = () => {
     setDisplayTime(25 * 60);
-    setTimeOn(false);
-    // setTimeOn(false);
-    // setBreakTime(5*60)
-    // setBreakTime(5*60)
+    setBreakTime(5 * 60);
+    setSessionTime(25 * 60);
   };
 
   return (
