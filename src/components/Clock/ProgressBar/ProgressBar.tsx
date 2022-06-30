@@ -7,13 +7,20 @@ interface ProgressBarProps {
   strokeWidth: number;
   circleOneStroke: string;
   circleTwoStroke: string;
+  text: string;
 }
 export const ProgressBar = (props: ProgressBarProps) => {
   const [offset, setOffset] = useState(0);
   const circleRef = useRef<any>(null);
 
-  const { size, progress, strokeWidth, circleOneStroke, circleTwoStroke } =
-    props;
+  const {
+    size,
+    progress,
+    strokeWidth,
+    circleOneStroke,
+    circleTwoStroke,
+    text,
+  } = props;
 
   const center = size / 2;
   const radius = size / 2 - strokeWidth / 2;
@@ -51,7 +58,7 @@ export const ProgressBar = (props: ProgressBarProps) => {
           strokeDashoffset={offset}
         ></circle>
         <text x={center} y={center} className="percentage">
-          {progress}
+          {text}
         </text>
       </svg>
     </MainContainer>
