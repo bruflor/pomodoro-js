@@ -1,6 +1,6 @@
 import { Pause, Play, Repeat } from "phosphor-react";
 import { useState } from "react";
-
+//
 export const MyTimer = () => {
   // const breakTime = 2;
   // const sessionTime = 5;
@@ -47,7 +47,7 @@ export const MyTimer = () => {
               setOnBreak(true);
               return breakTime;
             } else if (prev <= 0 && onBreakVariable) {
-              playBreakSound();
+              breakAudio.play();
               onBreakVariable = false;
               setOnBreak(false);
               return sessionTime;
@@ -60,16 +60,18 @@ export const MyTimer = () => {
       localStorage.clear();
       localStorage.setItem("interval-id", `${interval}`);
     }
+    //if to make our timer pause correctly and get back to the same time as before
     if (timeOn) {
       clearInterval(Number(localStorage.getItem("interval-id")));
     }
 
     setTimeOn(!timeOn);
   };
+
   const resetTime = () => {
     setDisplayTime(25 * 60);
-    setBreakTime(5 * 60);
-    setSessionTime(25 * 60);
+    // setBreakTime(5 * 60);
+    // setSessionTime(25 * 60);
   };
 
   return (
