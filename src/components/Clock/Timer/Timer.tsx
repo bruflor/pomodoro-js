@@ -1,88 +1,89 @@
 import { Pause, Play, Repeat } from "phosphor-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //
+
 export const MyTimer = () => {
-  // const breakTime = 2;
-  // const sessionTime = 5;
-  //this default value will come from the backend
+  const [displayTime, setDisplayTime] = useState(0);
+  const [sessionStatus, setSessionStatus] = useState("working");
+  const [sessions, setSessions] = useState(0);
 
-  const [sessionTime, setSessionTime] = useState(5);
-  const [breakTime, setBreakTime] = useState(3);
-  const [displayTime, setDisplayTime] = useState(5);
-  const [timeOn, setTimeOn] = useState(false);
-  const [onBreak, setOnBreak] = useState(false);
-  const [breakAudio, setBreakAudio] = useState(
-    new Audio("../../../assets/alarm-freesound.mp3")
-  );
+  const sessionNumber = 3;
+  const focusTime = 25;
+  const shortBreakTime = 5;
+  const LongBreakTime = 60;
 
-  const playBreakSound = () => {
-    breakAudio.currentTime = 0;
-    breakAudio.play();
-  };
+  const timeSetTime = 60 * 1000; //one minute;
 
-  //function for format the display time
-  const formatTime = (time: any) => {
-    let minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-    return (
-      (minutes < 10 ? "0" + minutes : minutes) +
-      ":" +
-      (seconds < 10 ? "0" + seconds : seconds)
-    );
-  };
-  const controlTime = () => {
-    let second = 1000;
-    let date = new Date().getTime();
-    let nextDate = new Date().getTime() + second;
-    let onBreakVariable = onBreak;
-
-    if (!timeOn) {
-      let interval = setInterval(() => {
-        date = new Date().getTime();
-        if (date > nextDate) {
-          setDisplayTime((prev) => {
-            if (prev <= 0 && !onBreakVariable) {
-              playBreakSound();
-              onBreakVariable = true;
-              setOnBreak(true);
-              return breakTime;
-            } else if (prev <= 0 && onBreakVariable) {
-              breakAudio.play();
-              onBreakVariable = false;
-              setOnBreak(false);
-              return sessionTime;
-            }
-            return prev - 1;
-          });
-          nextDate += second;
-        }
-      }, 30);
-      localStorage.clear();
-      localStorage.setItem("interval-id", `${interval}`);
+  useEffect(() => {
+    if (sessionStatus === "working" && sessions < sessionNumber) {
+      if (displayTime < focusTime) {
+        console.log(displayTime);
+        setTimeout(() => {
+          setDisplayTime(displayTime + 1);
+        }, timeSetTime);
+      } else {
+        setSessionStatus("short break");
+        console.log("Start break");
+        setDisplayTime(0);
+      }
     }
-    //if to make our timer pause correctly and get back to the same time as before
-    if (timeOn) {
-      clearInterval(Number(localStorage.getItem("interval-id")));
+    //short break if
+    else if (sessionStatus === "short break" && sessions < sessionNumber) {
+      if (displayTime < shortBreakTime) {
+        console.log(displayTime);
+        setTimeout(() => {
+          setDisplayTime(displayTime + 1);
+        }, timeSetTime);
+      } else {
+        setSessionStatus("working");
+        console.log("Start session");
+        setSessions(sessions + 1);
+        setDisplayTime(0);
+      }
     }
-
-    setTimeOn(!timeOn);
-  };
-
-  const resetTime = () => {
-    setDisplayTime(25 * 60);
-    // setBreakTime(5 * 60);
-    // setSessionTime(25 * 60);
-  };
+    //Long break if
+    else {
+      if (displayTime < LongBreakTime) {
+        setSessionStatus("Long Break");
+        console.log(displayTime);
+        console.log("Start Long Break");
+        setTimeout(() => {
+          setDisplayTime(displayTime + 1);
+        }, timeSetTime);
+      } else {
+      }
+    }
+  }, [displayTime]);
 
   return (
     <div>
-      <h1>{formatTime(displayTime)}</h1>
-      <button onClick={controlTime}>
+      {sessionStatus === "working" ? (
+        <>
+          <h1>{focusTime - displayTime}</h1>
+          <h2>{`Status: ${sessionStatus}`}</h2>
+          <h3>{`Session: ${sessions + 1}`}</h3>
+        </>
+      ) : sessionStatus === "short break" ? (
+        <>
+          <h1>{shortBreakTime - displayTime}</h1>
+          <h2>{`Status: ${sessionStatus}`}</h2>
+          <h3>{`Session: ${sessions + 1}`}</h3>
+        </>
+      ) : (
+        <>
+          <h1>{LongBreakTime - displayTime}</h1>
+          <h2>{`Status: ${sessionStatus}`}</h2>
+          <h3>{`Session: ${sessions}`}</h3>
+        </>
+      )}
+
+      {/* <button onClick={controlTime}>
+        play
         {timeOn ? <Pause size={32} /> : <Play size={32} />}
-      </button>
-      <button onClick={resetTime}>
+      </button> */}
+      {/* <button onClick={resetTime}>
         <Repeat size={32} />
-      </button>
+      </button> */}
     </div>
   );
 };
