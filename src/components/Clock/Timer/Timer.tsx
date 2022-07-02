@@ -1,4 +1,4 @@
-import { Pause, Play, Repeat } from "phosphor-react";
+import { Pause, Play, Repeat, Stop } from "phosphor-react";
 import { useEffect, useState } from "react";
 //
 
@@ -12,7 +12,7 @@ export const MyTimer = () => {
   const shortBreakTime = 5;
   const LongBreakTime = 60;
 
-  const timeSetTime = 0.1 * 1000; //one minute;
+  const minute = 1 * 1000; //one minute;
 
   const controlTime = () => {
     console.log("starting timer");
@@ -26,7 +26,7 @@ export const MyTimer = () => {
           console.log(displayTime);
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, timeSetTime);
+          }, minute);
         } else {
           setSessionStatus("short break");
           console.log("Start break");
@@ -39,7 +39,7 @@ export const MyTimer = () => {
           console.log(displayTime);
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, timeSetTime);
+          }, minute);
         } else {
           setSessionStatus("working");
           console.log("Start session");
@@ -55,7 +55,7 @@ export const MyTimer = () => {
           console.log("Start Long Break");
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, timeSetTime);
+          }, minute);
         } else {
         }
       }
@@ -85,13 +85,6 @@ export const MyTimer = () => {
 
       <button
         onClick={() => {
-          controlTime();
-        }}
-      >
-        {timerOn ? <Pause size={32} /> : <Play size={32} />}
-      </button>
-      <button
-        onClick={() => {
           setSessions(0);
           setDisplayTime(0);
           setSessionStatus("working");
@@ -99,6 +92,20 @@ export const MyTimer = () => {
         }}
       >
         <Repeat size={32} />
+      </button>
+      <button
+        onClick={() => {
+          controlTime();
+        }}
+      >
+        {timerOn ? <Pause size={32} /> : <Play size={32} />}
+      </button>
+      <button
+        onClick={() => {
+          setTimerOn(false);
+        }}
+      >
+        <Stop size={32} />
       </button>
     </div>
   );
