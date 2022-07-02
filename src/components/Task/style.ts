@@ -6,40 +6,6 @@ export const MainContainer = styled.div`
   gap: 32px;
 `;
 
-export const HeaderContainer = styled.div`
-  display: flex;
-  gap: 16px;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const TaskActionContainer = styled.div`
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  color: #6ebf49;
-  font-size: 1.25rem;
-`;
-
-export const TaskInfoContainer = styled.div`
-  display: flex;
-  gap: 16px;
-
-  & > h2 {
-    color: #6ebf49;
-    font-size: 1.5rem;
-    font-weight: 400;
-  }
-
-  & > p {
-    font-size: 1rem;
-  }
-
-  & > span {
-    font-size: 0.8rem;
-  }
-`;
-
 export const ClockContainer = styled.div`
   background: #27272a;
   width: 600px;
@@ -49,6 +15,7 @@ export const ClockContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   /* padding: 16px; */
 `;
 export const ClockHeader = styled.div`
@@ -58,4 +25,12 @@ export const ClockHeader = styled.div`
   padding: 16px;
   justify-content: center;
 `;
-//   export const HeaderContainer = styled.div``
+export const FormContainer = styled.div`
+  height: 100px;
+  width: 100%;
+  background: #27272a;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  /* background: red; */
+`;
