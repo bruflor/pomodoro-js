@@ -13,8 +13,14 @@ export const MyTimer = () => {
   const LongBreakTime = 60;
 
   const timeSetTime = 0.1 * 1000; //one minute;
+
+  const controlTime = () => {
+    console.log("starting timer");
+    setTimerOn(!timerOn);
+  };
+
   useEffect(() => {
-    if (!timerOn) {
+    if (timerOn) {
       if (sessionStatus === "working" && sessions < sessionNumber) {
         if (displayTime < focusTime) {
           console.log(displayTime);
@@ -54,8 +60,7 @@ export const MyTimer = () => {
         }
       }
     }
-  }, [displayTime]);
-
+  }, [displayTime, timerOn]);
   return (
     <div>
       {sessionStatus === "working" ? (
@@ -80,14 +85,21 @@ export const MyTimer = () => {
 
       <button
         onClick={() => {
-          setTimerOn(!timerOn);
+          controlTime();
         }}
       >
         {timerOn ? <Pause size={32} /> : <Play size={32} />}
       </button>
-      {/* <button onClick={resetTime}>
+      <button
+        onClick={() => {
+          setSessions(0);
+          setDisplayTime(0);
+          setSessionStatus("working");
+          setTimerOn(false);
+        }}
+      >
         <Repeat size={32} />
-      </button> */}
+      </button>
     </div>
   );
 };
