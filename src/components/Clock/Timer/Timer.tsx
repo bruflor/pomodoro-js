@@ -1,7 +1,12 @@
 import { Pause, Play, Repeat, Stop } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { ProgressBar } from "../ProgressBar/ProgressBar";
-import { MainContainer, TimeContainer, MyTimerContainer } from "./style";
+import {
+  MainContainer,
+  TimeContainer,
+  MyTimerContainer,
+  ButtonsContainer,
+} from "./style";
 
 //
 
@@ -20,6 +25,7 @@ export const MyTimer = () => {
   const controlTime = () => {
     // console.log("starting timer");
     setTimerOn(!timerOn);
+    return;
   };
 
   useEffect(() => {
@@ -62,8 +68,18 @@ export const MyTimer = () => {
         } else {
         }
       }
+    } else {
+      return;
     }
   }, [displayTime, timerOn]);
+
+  const reset = () => {
+    setTimerOn(false);
+    setSessions(0);
+    setSessionStatus("Focus");
+    setDisplayTime(0);
+    console.log(displayTime);
+  };
   return (
     <MainContainer>
       <TimeContainer>
@@ -78,7 +94,7 @@ export const MyTimer = () => {
         <MyTimerContainer>
           {sessionStatus === "Focus" ? (
             <>
-              <h1>{focusTime - displayTime}</h1>
+              <h1>{focusTime - displayTime} m</h1>
               <h2>{`Session: ${sessionStatus}`}</h2>
               <h3>{`Session ${sessions + 1}/${sessionNumber}`}</h3>
             </>
@@ -97,31 +113,40 @@ export const MyTimer = () => {
           )}
         </MyTimerContainer>
       </TimeContainer>
-
-      <button
-        onClick={() => {
-          setSessions(0);
-          setDisplayTime(0);
-          setSessionStatus("Focus");
-          setTimerOn(false);
-        }}
-      >
-        <Repeat size={32} />
-      </button>
-      <button
-        onClick={() => {
-          controlTime();
-        }}
-      >
-        {timerOn ? <Pause size={32} /> : <Play size={32} />}
-      </button>
-      <button
-        onClick={() => {
-          setTimerOn(false);
-        }}
-      >
-        <Stop size={32} />
-      </button>
+      <ButtonsContainer>
+        <button
+          onClick={() => {
+            reset();
+          }}
+        >
+          <Repeat size={24} />
+        </button>
+        {/* <button
+          onClick={() => {
+            setTimerOn(false);
+            setSessions(0);
+            setSessionStatus("Focus");
+            setDisplayTime(0);
+          }}
+        >
+          <Repeat size={24} />
+        </button> */}
+        <button
+          className="playPauseButton"
+          onClick={() => {
+            controlTime();
+          }}
+        >
+          {timerOn ? <Pause size={40} /> : <Play size={40} />}
+        </button>
+        <button
+          onClick={() => {
+            setTimerOn(false);
+          }}
+        >
+          <Stop size={24} />
+        </button>
+      </ButtonsContainer>
     </MainContainer>
   );
 };

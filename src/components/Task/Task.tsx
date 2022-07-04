@@ -1,5 +1,5 @@
 import { ClockContainer, MainContainer, FormContainer } from "./style";
-import { Clock } from "../Clock/Clock";
+import { MyTimer } from "../Clock/Timer/Timer";
 
 //mock to come from the form in the future
 // const myData = {
@@ -14,7 +14,7 @@ export const Task = () => {
     <MainContainer>
       <FormContainer>Meu formulario</FormContainer>
       <ClockContainer>
-        <Clock />
+        <MyTimer />
       </ClockContainer>
     </MainContainer>
   );
