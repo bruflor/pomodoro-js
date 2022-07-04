@@ -82,7 +82,6 @@ export const MyTimer = () => {
   };
 
   const reduceProgressBar = (refTime: number) => {
-    console.log(Math.sign(90));
     return (refTime - displayTime) / refTime;
   };
 
