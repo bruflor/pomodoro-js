@@ -13,12 +13,15 @@ export const TitleContainer = styled.div`
 export const MyForm = styled.form`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  height: 200px;
+  align-items: center;
+  /* height: 200px; */
   background: #27272a;
   display: flex;
   justify-content: center;
   gap: 8px;
+  max-height: 200px;
+  padding: 32px;
+  transition: 0.3s;
 
   & button {
     border: 1px solid #6ebf49;
@@ -34,9 +37,14 @@ export const MyForm = styled.form`
     color: white;
     cursor: pointer;
   }
+  & .small {
+    height: 60px;
+    max-height: 60px;
+  }
 `;
 export const Inputscontainer = styled.form`
   display: flex;
+  align-items: flex-end;
   gap: 32px;
   & div {
     display: flex;

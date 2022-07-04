@@ -29,7 +29,7 @@ export const FormContainer = styled.div`
   /* height: 200px;
   width: 100%; */
   background: #27272a;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   /* background: red; */
