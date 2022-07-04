@@ -5,6 +5,7 @@ export const MainContainer = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
+
   .svg {
     display: block;
     margin: 20px auto;

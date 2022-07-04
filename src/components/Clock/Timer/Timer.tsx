@@ -20,7 +20,7 @@ export const MyTimer = () => {
   const shortBreakTime = 5;
   const LongBreakTime = 60;
 
-  const minute = 1 * 1000; //one minute;
+  const timeminutes = 1 * 1000; //one timeminutes;
 
   const controlTime = () => {
     // console.log("starting timer");
@@ -32,10 +32,10 @@ export const MyTimer = () => {
     if (timerOn) {
       if (sessionStatus === "Focus" && sessions < sessionNumber) {
         if (displayTime < focusTime) {
-          console.log(displayTime);
+          // console.log(displayTime);
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, minute);
+          }, timeminutes);
         } else {
           setSessionStatus("Short break");
           // console.log("Start break");
@@ -48,7 +48,7 @@ export const MyTimer = () => {
           console.log(displayTime);
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, minute);
+          }, timeminutes);
         } else {
           setSessionStatus("Focus");
           // console.log("Start session");
@@ -64,7 +64,7 @@ export const MyTimer = () => {
           // console.log("Start Long Break");
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, minute);
+          }, timeminutes);
         } else {
         }
       }
@@ -78,17 +78,29 @@ export const MyTimer = () => {
     setSessions(0);
     setSessionStatus("Focus");
     setDisplayTime(0);
-    console.log(displayTime);
+    // console.log(displayTime);
   };
+
+  const reduceProgressBar = (refTime: number) => {
+    console.log(Math.sign(90));
+    return (refTime - displayTime) / refTime;
+  };
+
   return (
     <MainContainer>
       <TimeContainer>
         <ProgressBar
           size={250}
-          progress={20}
+          progress={
+            sessionStatus === "Focus"
+              ? reduceProgressBar(focusTime)
+              : sessionStatus === "Short break"
+              ? reduceProgressBar(shortBreakTime)
+              : reduceProgressBar(LongBreakTime)
+          }
           strokeWidth={10}
-          circleOneStroke={"#777777"}
-          circleTwoStroke={"#A4D97E"}
+          circleOneStroke={"#A4D97E"}
+          circleTwoStroke={"#777777 "}
           text=""
         />
         <MyTimerContainer>
@@ -101,13 +113,13 @@ export const MyTimer = () => {
           ) : sessionStatus === "Short break" ? (
             <>
               <h1>{shortBreakTime - displayTime}</h1>
-              <h2>{`Status: ${sessionStatus}`}</h2>
+              <h2>{`Session: ${sessionStatus}`}</h2>
               <h3>{`Session: ${sessions + 1}`}</h3>
             </>
           ) : (
             <>
               <h1>{LongBreakTime - displayTime}</h1>
-              <h2>{`Status: ${sessionStatus}`}</h2>
+              <h2>{`Session: ${sessionStatus}`}</h2>
               <h3>{`Session: ${sessions}`}</h3>
             </>
           )}
