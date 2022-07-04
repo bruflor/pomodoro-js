@@ -12,12 +12,12 @@ const App = () => {
       <GlobalStyle />
       <div>
         <Routes>
-          <Route path="/login" element={<WelcomePage />} />
-          <Route path="/" element={<MainPage />}>
-            <Route path="/mytasks" element={<MyTasks />} />
+          {/* <Route path="/login" element={<WelcomePage />} /> */}
+          <Route path="/" element={<Task />}>
+            {/* <Route path="/mytasks" element={<MyTasks />} /> */}
 
-            <Route path="/task" element={<Task />} />
-            <Route path="/statistics" element={<Statistics />} />
+            {/* <Route path="/task" element={<Task />} />
+            <Route path="/statistics" element={<Statistics />} /> */}
           </Route>
 
           {/* <Route path="/:taskname" element={<Task />} /> */}

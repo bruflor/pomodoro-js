@@ -1,10 +1,18 @@
-import { Pause, Play, Repeat } from "phosphor-react";
+import { Pause, Play, Repeat, Stop } from "phosphor-react";
 import { useEffect, useState } from "react";
+import { ProgressBar } from "../ProgressBar/ProgressBar";
+import {
+  MainContainer,
+  TimeContainer,
+  MyTimerContainer,
+  ButtonsContainer,
+} from "./style";
+
 //
 
 export const MyTimer = () => {
   const [displayTime, setDisplayTime] = useState(0);
-  const [sessionStatus, setSessionStatus] = useState("working");
+  const [sessionStatus, setSessionStatus] = useState("Focus");
   const [sessions, setSessions] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
   const sessionNumber = 3;
@@ -12,37 +20,38 @@ export const MyTimer = () => {
   const shortBreakTime = 5;
   const LongBreakTime = 60;
 
-  const timeSetTime = 0.1 * 1000; //one minute;
+  const timeminutes = 1 * 1000; //one timeminutes;
 
   const controlTime = () => {
-    console.log("starting timer");
+    // console.log("starting timer");
     setTimerOn(!timerOn);
+    return;
   };
 
   useEffect(() => {
     if (timerOn) {
-      if (sessionStatus === "working" && sessions < sessionNumber) {
+      if (sessionStatus === "Focus" && sessions < sessionNumber) {
         if (displayTime < focusTime) {
-          console.log(displayTime);
+          // console.log(displayTime);
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, timeSetTime);
+          }, timeminutes);
         } else {
-          setSessionStatus("short break");
-          console.log("Start break");
+          setSessionStatus("Short break");
+          // console.log("Start break");
           setDisplayTime(0);
         }
       }
-      //short break if
-      else if (sessionStatus === "short break" && sessions < sessionNumber) {
+      //Short break if
+      else if (sessionStatus === "Short break" && sessions < sessionNumber) {
         if (displayTime < shortBreakTime) {
           console.log(displayTime);
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, timeSetTime);
+          }, timeminutes);
         } else {
-          setSessionStatus("working");
-          console.log("Start session");
+          setSessionStatus("Focus");
+          // console.log("Start session");
           setSessions(sessions + 1);
           setDisplayTime(0);
         }
@@ -51,55 +60,104 @@ export const MyTimer = () => {
       else {
         if (displayTime < LongBreakTime) {
           setSessionStatus("Long Break");
-          console.log(displayTime);
-          console.log("Start Long Break");
+          // console.log(displayTime);
+          // console.log("Start Long Break");
           setTimeout(() => {
             setDisplayTime(displayTime + 1);
-          }, timeSetTime);
+          }, timeminutes);
         } else {
         }
       }
+    } else {
+      return;
     }
   }, [displayTime, timerOn]);
-  return (
-    <div>
-      {sessionStatus === "working" ? (
-        <>
-          <h1>{focusTime - displayTime}</h1>
-          <h2>{`Status: ${sessionStatus}`}</h2>
-          <h3>{`Session: ${sessions + 1}`}</h3>
-        </>
-      ) : sessionStatus === "short break" ? (
-        <>
-          <h1>{shortBreakTime - displayTime}</h1>
-          <h2>{`Status: ${sessionStatus}`}</h2>
-          <h3>{`Session: ${sessions + 1}`}</h3>
-        </>
-      ) : (
-        <>
-          <h1>{LongBreakTime - displayTime}</h1>
-          <h2>{`Status: ${sessionStatus}`}</h2>
-          <h3>{`Session: ${sessions}`}</h3>
-        </>
-      )}
 
-      <button
-        onClick={() => {
-          controlTime();
-        }}
-      >
-        {timerOn ? <Pause size={32} /> : <Play size={32} />}
-      </button>
-      <button
-        onClick={() => {
-          setSessions(0);
-          setDisplayTime(0);
-          setSessionStatus("working");
-          setTimerOn(false);
-        }}
-      >
-        <Repeat size={32} />
-      </button>
-    </div>
+  const reset = () => {
+    setTimerOn(false);
+    setSessions(0);
+    setSessionStatus("Focus");
+    setDisplayTime(0);
+    // console.log(displayTime);
+  };
+
+  const reduceProgressBar = (refTime: number) => {
+    return (refTime - displayTime) / refTime;
+  };
+
+  return (
+    <MainContainer>
+      <TimeContainer>
+        <ProgressBar
+          size={250}
+          progress={
+            sessionStatus === "Focus"
+              ? reduceProgressBar(focusTime)
+              : sessionStatus === "Short break"
+              ? reduceProgressBar(shortBreakTime)
+              : reduceProgressBar(LongBreakTime)
+          }
+          strokeWidth={10}
+          circleOneStroke={"#A4D97E"}
+          circleTwoStroke={"#777777 "}
+          text=""
+        />
+        <MyTimerContainer>
+          {sessionStatus === "Focus" ? (
+            <>
+              <h1>{focusTime - displayTime} m</h1>
+              <h2>{`Session: ${sessionStatus}`}</h2>
+              <h3>{`Session ${sessions + 1}/${sessionNumber}`}</h3>
+            </>
+          ) : sessionStatus === "Short break" ? (
+            <>
+              <h1>{shortBreakTime - displayTime}</h1>
+              <h2>{`Session: ${sessionStatus}`}</h2>
+              <h3>{`Session: ${sessions + 1}`}</h3>
+            </>
+          ) : (
+            <>
+              <h1>{LongBreakTime - displayTime}</h1>
+              <h2>{`Session: ${sessionStatus}`}</h2>
+              <h3>{`Session: ${sessions}`}</h3>
+            </>
+          )}
+        </MyTimerContainer>
+      </TimeContainer>
+      <ButtonsContainer>
+        <button
+          onClick={() => {
+            reset();
+          }}
+        >
+          <Repeat size={24} />
+        </button>
+        {/* <button
+          onClick={() => {
+            setTimerOn(false);
+            setSessions(0);
+            setSessionStatus("Focus");
+            setDisplayTime(0);
+          }}
+        >
+          <Repeat size={24} />
+        </button> */}
+        <button
+          className="playPauseButton"
+          onClick={() => {
+            controlTime();
+          }}
+        >
+          {timerOn ? <Pause size={40} /> : <Play size={40} />}
+        </button>
+        <button
+          onClick={() => {
+            setTimerOn(false);
+          }}
+        >
+          <Stop size={24} />
+        </button>
+      </ButtonsContainer>
+    </MainContainer>
   );
 };
