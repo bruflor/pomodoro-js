@@ -9,18 +9,29 @@ import {
 } from "./style";
 
 //
+interface MyTimerProps {
+  focusSession: number;
+  shortBreakSession: number;
+  longBreakSession: number;
+  sessionsQuantity: number;
+}
 
-export const MyTimer = () => {
+export const MyTimer = ({
+  focusSession,
+  shortBreakSession,
+  longBreakSession,
+  sessionsQuantity,
+}: MyTimerProps) => {
   const [displayTime, setDisplayTime] = useState(0);
   const [sessionStatus, setSessionStatus] = useState("Focus");
   const [sessions, setSessions] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
-  const sessionNumber = 3;
-  const focusTime = 25;
-  const shortBreakTime = 5;
-  const LongBreakTime = 60;
+  const sessionNumber = sessionsQuantity;
+  const focusTime = focusSession;
+  const shortBreakTime = shortBreakSession;
+  const LongBreakTime = longBreakSession;
 
-  const timeminutes = 1 * 1000; //one timeminutes;
+  const timeminutes = 60 * 1000; //one timeminutes;
 
   const controlTime = () => {
     // console.log("starting timer");
@@ -92,10 +103,10 @@ export const MyTimer = () => {
           size={250}
           progress={
             sessionStatus === "Focus"
-              ? reduceProgressBar(focusTime)
+              ? reduceProgressBar(focusTime - 1)
               : sessionStatus === "Short break"
-              ? reduceProgressBar(shortBreakTime)
-              : reduceProgressBar(LongBreakTime)
+              ? reduceProgressBar(shortBreakTime - 1)
+              : reduceProgressBar(LongBreakTime - 1)
           }
           strokeWidth={10}
           circleOneStroke={"#A4D97E"}

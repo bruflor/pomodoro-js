@@ -26,11 +26,11 @@ export const ClockHeader = styled.div`
   justify-content: center;
 `;
 export const FormContainer = styled.div`
-  height: 100px;
-  width: 100%;
+  /* height: 200px;
+  width: 100%; */
   background: #27272a;
-  padding: 8px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
+  justify-content: center;
   /* background: red; */
 `;
