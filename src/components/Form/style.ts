@@ -60,7 +60,19 @@ export const Inputscontainer = styled.section`
     border-radius: 8px;
     width: 180px;
     height: 30px;
-    color: white;
+    color: #aaaaaa;
     text-align: center;
+
+    -webkit-appearance: none;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
   }
 `;

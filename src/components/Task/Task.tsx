@@ -9,12 +9,6 @@ export const Task = () => {
   const [shortBreakSessionInput, setShortBreakSessionInput] = useState(5);
   const [longBreakSession, setlongBreakSession] = useState(60);
 
-  // async function handleSubmit(event: any) {
-  //   event.preventDefault();
-  //   let sessionsNumber = setsessionsQuantity(
-  //     Number(event.target.sessionsNumber)
-  //   );
-  // }
   return (
     <MainContainer>
       <FormContainer>
@@ -24,6 +18,9 @@ export const Task = () => {
             <input
               value={sessionsQuantity}
               name="sessionsNumber"
+              type="number"
+              max={10}
+              min={1}
               onChange={(event) =>
                 setsessionsQuantity(Number(event.target.value))
               }
@@ -33,6 +30,10 @@ export const Task = () => {
             <label>Focus session (m)</label>
             <input
               value={focusSessionInput}
+              type="number"
+              max={60}
+              min={1}
+              maxLength={2}
               onChange={(event) =>
                 setFocusSessionInput(Number(event.target.value))
               }
@@ -42,6 +43,10 @@ export const Task = () => {
             <label>Short break session (m)</label>
             <input
               value={shortBreakSessionInput}
+              type="number"
+              max={30}
+              min={1}
+              maxLength={2}
               onChange={(event) =>
                 setShortBreakSessionInput(Number(event.target.value))
               }
@@ -51,6 +56,10 @@ export const Task = () => {
             <label>Long break session (m)</label>
             <input
               value={longBreakSession}
+              type="number"
+              max={240}
+              min={30}
+              maxLength={2}
               onChange={(event) =>
                 setlongBreakSession(Number(event.target.value))
               }

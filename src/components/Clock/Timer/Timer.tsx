@@ -31,7 +31,7 @@ export const MyTimer = ({
   const shortBreakTime = shortBreakSession;
   const LongBreakTime = longBreakSession;
 
-  const timeminutes = 1 * 1000; //one timeminutes;
+  const timeminutes = 60 * 1000; //one timeminutes;
 
   const controlTime = () => {
     // console.log("starting timer");
