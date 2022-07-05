@@ -45,10 +45,14 @@ export const MyForm = styled.div`
 export const Inputscontainer = styled.section`
   display: flex;
   align-items: flex-end;
+  justify-content: center;
+
   gap: 32px;
-  & div {
+  & fieldset {
     display: flex;
     flex-direction: column;
+    border: none;
+    text-align: center;
   }
   & input {
     border: 1px solid #a4d97e;
@@ -57,5 +61,6 @@ export const Inputscontainer = styled.section`
     width: 180px;
     height: 30px;
     color: white;
+    text-align: center;
   }
 `;

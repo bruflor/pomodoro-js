@@ -3,51 +3,71 @@ import { MyTimer } from "../Clock/Timer/Timer";
 import { SessionsForm } from "../Form/SessionsForm";
 import { useState } from "react";
 
-//mock to come from the form in the future
-// const myData = {
-//   sessionNumber: 3,
-//   focusTime: 25,
-//   shortBreakTime: 5,
-//   LongBreakTime: 60,
-// };
-
 export const Task = () => {
-  const [focusSessionInput, setFocusSessionInput] = useState(0);
-  const [shortBreakSessionInput, setShortBreakSessionInput] = useState(0);
-  const [longBreakSession, setlongBreakSession] = useState(0);
+  const [sessionsQuantity, setsessionsQuantity] = useState(3);
+  const [focusSessionInput, setFocusSessionInput] = useState(25);
+  const [shortBreakSessionInput, setShortBreakSessionInput] = useState(5);
+  const [longBreakSession, setlongBreakSession] = useState(60);
 
+  // async function handleSubmit(event: any) {
+  //   event.preventDefault();
+  //   let sessionsNumber = setsessionsQuantity(
+  //     Number(event.target.sessionsNumber)
+  //   );
+  // }
   return (
     <MainContainer>
       <FormContainer>
         <SessionsForm>
-          <div>
-            <label>Focus session</label>
+          <fieldset>
+            <label>How many sessions</label>
             <input
+              value={sessionsQuantity}
+              name="sessionsNumber"
+              onChange={(event) =>
+                setsessionsQuantity(Number(event.target.value))
+              }
+            />
+          </fieldset>
+          <fieldset>
+            <label>Focus session (m)</label>
+            <input
+              value={focusSessionInput}
               onChange={(event) =>
                 setFocusSessionInput(Number(event.target.value))
               }
             />
-          </div>
-          <div>
-            <label>Short break session</label>
-            <input />
-          </div>
-          <div>
-            <label>Long break session</label>
-            <input />
-          </div>
-          <button
-            type="submit"
-            onClick={() => {
-              console.log(focusSessionInput);
-            }}
-          >
+          </fieldset>
+          <fieldset>
+            <label>Short break session (m)</label>
+            <input
+              value={shortBreakSessionInput}
+              onChange={(event) =>
+                setShortBreakSessionInput(Number(event.target.value))
+              }
+            />
+          </fieldset>
+          <fieldset>
+            <label>Long break session (m)</label>
+            <input
+              value={longBreakSession}
+              onChange={(event) =>
+                setlongBreakSession(Number(event.target.value))
+              }
+            />
+          </fieldset>
+          {/* <button type="submit" onClick={() => {}}>
             Save sessions
-          </button>
+          </button> */}
         </SessionsForm>
       </FormContainer>
       <ClockContainer>
-        <MyTimer />
+        <MyTimer
+          focusSession={focusSessionInput}
+          shortBreakSession={shortBreakSessionInput}
+          longBreakSession={longBreakSession}
+          sessionsQuantity={sessionsQuantity}
+        />
       </ClockContainer>
     </MainContainer>
   );
