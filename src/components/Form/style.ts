@@ -10,7 +10,7 @@ export const TitleContainer = styled.div`
     color: #6ebf49;
   }
 `;
-export const MyForm = styled.form`
+export const MyForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +42,7 @@ export const MyForm = styled.form`
     max-height: 60px;
   }
 `;
-export const Inputscontainer = styled.form`
+export const Inputscontainer = styled.section`
   display: flex;
   align-items: flex-end;
   gap: 32px;
@@ -56,5 +56,6 @@ export const Inputscontainer = styled.form`
     border-radius: 8px;
     width: 180px;
     height: 30px;
+    color: white;
   }
 `;

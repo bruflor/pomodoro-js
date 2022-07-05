@@ -10,7 +10,7 @@ import {
 
 //
 
-export const MyTimer = () => {
+export const MyTimer = ({ nome }: any) => {
   const [displayTime, setDisplayTime] = useState(0);
   const [sessionStatus, setSessionStatus] = useState("Focus");
   const [sessions, setSessions] = useState(0);
@@ -20,7 +20,7 @@ export const MyTimer = () => {
   const shortBreakTime = 5;
   const LongBreakTime = 60;
 
-  const timeminutes = 1 * 1000; //one timeminutes;
+  const timeminutes = 60 * 1000; //one timeminutes;
 
   const controlTime = () => {
     // console.log("starting timer");
@@ -158,6 +158,7 @@ export const MyTimer = () => {
           <Stop size={24} />
         </button>
       </ButtonsContainer>
+      <p>{nome}</p>
     </MainContainer>
   );
 };

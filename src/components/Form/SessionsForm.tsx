@@ -2,31 +2,15 @@ import { CaretDown, CaretUp, Pencil } from "phosphor-react";
 import { useState } from "react";
 import { MyForm, TitleContainer, Inputscontainer } from "./style";
 
-export const SessionsForm = () => {
+interface SessionFormProps {
+  children: React.ReactNode;
+}
+// interface FormEvent {}
+export const SessionsForm = ({ children }: SessionFormProps) => {
   const [shrink, setshrink] = useState(false);
   const shrinkForm = () => {
     if (shrink) {
-      return (
-        <>
-          <Inputscontainer>
-            <div>
-              <label>Focus session</label>
-              <input />
-            </div>
-            <div>
-              <label>Shor break session</label>
-              <input />
-            </div>
-            <div>
-              <label>Long break session</label>
-              <input />
-            </div>
-          </Inputscontainer>
-          <button type="submit" onClick={() => {}}>
-            Save sessions
-          </button>
-        </>
-      );
+      return <>{children}</>;
     }
   };
 
@@ -41,27 +25,10 @@ export const SessionsForm = () => {
               setshrink(!shrink);
             }}
           >
-            {shrink ? <CaretDown size={24} /> : <CaretUp size={24} />}
+            {shrink ? <CaretUp size={24} /> : <CaretDown size={24} />}
           </a>
         </TitleContainer>
         <Inputscontainer>{shrinkForm()}</Inputscontainer>
-        {/* <Inputscontainer>
-          <div>
-            <label>Focus session</label>
-            <input />
-          </div>
-          <div>
-            <label>Shor break session</label>
-            <input />
-          </div>
-          <div>
-            <label>Long break session</label>
-            <input />
-          </div>
-        </Inputscontainer>
-        <button type="submit" onClick={() => {}}>
-          Save sessions
-        </button> */}
       </MyForm>
     </>
   );
