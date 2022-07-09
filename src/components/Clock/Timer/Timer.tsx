@@ -7,7 +7,7 @@ import {
   MyTimerContainer,
   ButtonsContainer,
 } from "./style";
-
+import audio from "../../../assets/alarm-freesound.mp3";
 //
 interface MyTimerProps {
   focusSession: number;
@@ -22,6 +22,8 @@ export const MyTimer = ({
   longBreakSession,
   sessionsQuantity,
 }: MyTimerProps) => {
+  const alarm = new Audio(audio);
+
   const [displayTime, setDisplayTime] = useState(0);
   const [sessionStatus, setSessionStatus] = useState("Focus");
   const [sessions, setSessions] = useState(0);
@@ -48,6 +50,9 @@ export const MyTimer = ({
             setDisplayTime(displayTime + 1);
           }, timeminutes);
         } else {
+          setTimerOn(!timerOn);
+
+          alarm.play();
           setSessionStatus("Short break");
           // console.log("Start break");
           setDisplayTime(0);
@@ -61,6 +66,7 @@ export const MyTimer = ({
             setDisplayTime(displayTime + 1);
           }, timeminutes);
         } else {
+          alarm.play();
           setSessionStatus("Focus");
           // console.log("Start session");
           setSessions(sessions + 1);
